@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9DC300">
+
+    <TextView
+        android:id="@+id/setupTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Up"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/calorieGoalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Calorie Goal"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/setupTitleText"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/calorieGoalEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Enter calorie goal"
+        android:layout_below="@id/calorieGoalText"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/waterGoalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Water Intake Goal (cups)"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/calorieGoalEditText"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/waterGoalEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Enter water intake goal (cups)"
+        android:layout_below="@id/waterGoalText"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/activityGoalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daily Activity Level Goal"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/waterGoalEditText"
+        android:layout_centerHorizontal="true"/>
+
+    <LinearLayout
+        android:id="@+id/activityLevelOptionsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/activityGoalText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/easyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:layout_weight="1"
+            android:onClick="onActivityLevelSelected"/>
+
+        <Button
+            android:id="@+id/mediumButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medium"
+            android:layout_weight="1"
+            android:onClick="onActivityLevelSelected"/>
+
+        <Button
+            android:id="@+id/hardButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hard"
+            android:layout_weight="1"
+            android:onClick="onActivityLevelSelected"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/characterSelectionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Your Character"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/petNameEditText"
+        android:layout_centerHorizontal="true"/>
+
+    <GridLayout
+        android:id="@+id/characterSelectionGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/characterSelectionText"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:columnCount="3"
+        android:rowCount="1"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false">
+
+        <ImageView
+            android:id="@+id/character1ImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/character1"
+            android:layout_columnWeight="1"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="center"
+            android:tag="character1"/>
+
+        <ImageView
+            android:id="@+id/character2ImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/character2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="center"
+            android:tag="character2"/>
+
+        <ImageView
+            android:id="@+id/character3ImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/character3"
+            android:layout_columnWeight="1"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center"
+            android:tag="character3"/>
+    </GridLayout>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_below="@id/characterSelectionGrid"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+    <TextView
+        android:id="@+id/petNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Your Pet's Name"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/activityLevelOptionsLayout"
+        android:layout_centerHorizontal="true"/>
+
+    <EditText
+        android:id="@+id/petNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="Enter pet's name"
+        android:layout_below="@id/petNameText"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
