@@ -140,6 +140,8 @@ class PlayRoomActivity : AppCompatActivity(), SensorEventListener, QuestManagerL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playroom)
+        handler = Handler(Looper.getMainLooper())
+
         questManager = QuestManager(this, QuestRepository.quests)
         logAllPreferences()
         //  Log.d("PlayRoomActivity", "PlayRoomActivity started")
@@ -1457,12 +1459,18 @@ class PlayRoomActivity : AppCompatActivity(), SensorEventListener, QuestManagerL
             override fun run() {
                 blinkPet(blinkResourceId, normalResourceId, nextDoubleBlink)
                 nextDoubleBlink = !nextDoubleBlink
+                Log.d("startBlinking", "Runnable running, next double blink: $nextDoubleBlink")
                 handler?.postDelayed(this, 10000)
             }
         }
         blinkRunnable = newRunnable
 
-        handler?.postDelayed(blinkRunnable!!, 10000)  //this is the first delay for the first blink
+        if (handler != null) {
+            handler?.post(blinkRunnable!!)
+            Log.d("startBlinking", "Blinking started with resource ID: $blinkResourceId")
+        } else {
+            Log.e("startBlinking", "Handler not initialized")
+        }
     }
 
 
@@ -1471,18 +1479,25 @@ class PlayRoomActivity : AppCompatActivity(), SensorEventListener, QuestManagerL
         if (localRunnable != null) {
             handler?.removeCallbacks(localRunnable)
             blinkRunnable = null
+            Log.d("stopBlinking", "Blinking stopped.")
+
         }
     }
     fun updateIdleState() {
-        // Log.d("updateIdleState", "Current quest: $currentQuest, Running with sword: $runningWithSword")
+         Log.d("updateIdleState", "Current quest: $currentQuest, Running with sword: $runningWithSword")
 
         if (currentQuest == null && !runningWithSword) {
             val selectedPetIndex = derivePetIndex()
             val normalResourceId = resources.getIdentifier("character$selectedPetIndex", "drawable", packageName)
             val blinkResourceId = resources.getIdentifier("c${selectedPetIndex}idle_007", "drawable", packageName)
+
             startBlinking(normalResourceId, blinkResourceId)
+            Log.d("updateIdleState", "Idle animation started for pet index: $selectedPetIndex")
+
         } else {
             stopBlinking()
+            Log.d("updateIdleState", "Idle animation stopped due to active quest or running state")
+
             val selectedPetIndex = derivePetIndex()
             updateRunningAnimationFrames(selectedPetIndex)
         }
